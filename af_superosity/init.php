@@ -5,7 +5,7 @@ class Af_Superosity extends Plugin {
 
 	function about() {
 		return array(1.2,
-			"Embed Comic in Superosity feeds",
+			"Embed Comic in Superosity feeds", //Feed url http://superosity.keenspot.com/comic.rss
 			"antiKk");
 	}
 
