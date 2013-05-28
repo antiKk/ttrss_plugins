@@ -5,7 +5,7 @@ class Af_Awkwardzombie extends Plugin {
 
 	function about() {
 		return array(1.0,
-			"Embed Comic in Awkward Zombie RSS Feed",
+			"Embed Comic in Awkward Zombie RSS Feed", //Feed url http://www.awkwardzombie.com/awkward.php
 			"antiKk");
 	}
 
