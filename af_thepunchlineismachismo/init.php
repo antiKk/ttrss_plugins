@@ -5,7 +5,7 @@ class Af_Thepunchlineismachismo extends Plugin {
 
 	function about() {
 		return array(1.2,
-			"Embed Comic in Manly Guys Doing Manly Things RSS Feed",
+			"Embed Comic in Manly Guys Doing Manly Things RSS Feed", //Feed url http://thepunchlineismachismo.com/feed
 			"antiKk");
 	}
 
