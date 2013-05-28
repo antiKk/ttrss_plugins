@@ -5,7 +5,7 @@ class Af_useswordonmonster extends Plugin {
 
 	function about() {
 		return array(1.0,
-			"Embed Comic in Use Sword on Monster RSS Feed",
+			"Embed Comic in Use Sword on Monster RSS Feed", //Feed url http://www.useswordonmonster.com/?feed=rss2
 			"antiKk");
 	}
 
