@@ -17,7 +17,7 @@ class Af_YellowPeril extends Plugin {
 	
 	function hook_article_filter($article) {
 		$owner_uid = $article["owner_uid"];
-		$originalarticle = $article["content"];
+		$original = $article;
 
 		if (strpos($article["link"], "ypcomic.com") !== FALSE && strpos($article["title"], "[Comic]") !== FALSE) {
 			if (strpos($article["plugin_data"], "ypcomic,$owner_uid:") === FALSE) {
@@ -38,13 +38,12 @@ class Af_YellowPeril extends Plugin {
 					}
 
 				if ($basenode) {
-						$article["content"] = $doc->saveXML($basenode, LIBXML_NOEMPTYTAG);
+						$article["content"] = $doc->saveXML($basenode, LIBXML_NOEMPTYTAG) . $original["content"];
 						$article["plugin_data"] = "ypcomic,$owner_uid:" . $article["plugin_data"];
 					}
 				}
 			} else if (isset($article["stored"]["content"])) {
 				$article["content"] = $article["stored"]["content"];
-				$article["content"] = $article["content"].$originalarticle;
 			}
 		}
 		return $article;
