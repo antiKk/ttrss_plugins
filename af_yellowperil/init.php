@@ -4,7 +4,7 @@ class Af_YellowPeril extends Plugin {
 	private $host;
 
 	function about() {
-		return array(1.0,
+		return array(1.1,
 			"Embed Comic in Yellow Peril RSS Feed", //Feed url http://feeds.feedburner.com/YellowPeril
 			"antiKk");
 	}
@@ -17,6 +17,7 @@ class Af_YellowPeril extends Plugin {
 	
 	function hook_article_filter($article) {
 		$owner_uid = $article["owner_uid"];
+		$originalarticle = $article["content"];
 
 		if (strpos($article["link"], "ypcomic.com") !== FALSE && strpos($article["title"], "[Comic]") !== FALSE) {
 			if (strpos($article["plugin_data"], "ypcomic,$owner_uid:") === FALSE) {
@@ -43,6 +44,7 @@ class Af_YellowPeril extends Plugin {
 				}
 			} else if (isset($article["stored"]["content"])) {
 				$article["content"] = $article["stored"]["content"];
+				$article["content"] = $article["content"].$originalarticle;
 			}
 		}
 		return $article;
