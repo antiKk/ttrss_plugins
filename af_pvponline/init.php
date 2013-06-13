@@ -17,7 +17,7 @@ class Af_pvponline extends Plugin {
 	function hook_article_filter($article) {
 		$owner_uid = $article["owner_uid"];
 
-		if (strpos($article["link"], "pvponline.com") !== FALSE && strpos($article["title"], "Comic:") !== FALSE) {
+		if (strpos($article["link"], "online.com") !== FALSE && strpos($article["title"], "Comic:") !== FALSE) {
 			if (strpos($article["plugin_data"], "pvponline,$owner_uid:") === FALSE) {
 		
 				$doc = new DOMDocument();

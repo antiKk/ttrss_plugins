@@ -44,6 +44,39 @@ class Af_tabletitans extends Plugin {
 				$article["content"] = $article["stored"]["content"];
 			}
 		}
+		
+		if (strpos($article["link"], "tabletitans.com") !== FALSE && strpos($article["title"], "Tales:") !== FALSE) {
+			if (strpos($article["plugin_data"], "tabletitans,$owner_uid:") === FALSE) {
+				if ($debug_enabled) {
+					_debug("af_tabletitans: Processing tale");
+				}
+				$doc = new DOMDocument();
+				$doc->loadHTML(fetch_file_contents($article["link"]));
+
+				if ($doc) {
+					$xpath = new DOMXPath($doc);
+					$entries = $xpath->query('(//section[@class="tales"])');
+
+					$basenode = false;
+
+					foreach ($entries as $entry) {
+						$basenode = $entry;
+					}
+
+					$uninteresting = $xpath->query("(//div[contains(@class,'columns')])");
+					foreach ($uninteresting as $i) {
+						$i->parentNode->removeChild($i);
+					}
+
+					if ($basenode){
+						$article["content"] = $doc->saveXML($basenode);
+						$article["plugin_data"] = "tabletitans,$owner_uid:" . $article["plugin_data"];
+					}
+				}
+			} else if (isset($article["stored"]["content"])) {
+				$article["content"] = $article["stored"]["content"];
+			}
+		}
 		return $article;
 	}
 	
