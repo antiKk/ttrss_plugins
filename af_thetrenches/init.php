@@ -58,7 +58,7 @@ class Af_TheTrenches extends Plugin {
 
 				if ($doc) {
 					$xpath = new DOMXPath($doc);
-					$entries = $xpath->query('(//div[@class="copy"])');
+					$entries = $xpath->query('(//div[@class="post"])');
 
 					$basenode = false;
 
@@ -66,6 +66,11 @@ class Af_TheTrenches extends Plugin {
 						$basenode = $entry;
 					}
 
+					$uninteresting = $xpath->query("(//ul[@class='meta']");
+					foreach ($uninteresting as $i) {
+						$i->parentNode->removeChild($i);
+					}
+					
 					if ($basenode){
 						$article["content"] = $doc->saveXML($basenode);
 						$article["plugin_data"] = "thetrenches,$owner_uid:" . $article["plugin_data"];
